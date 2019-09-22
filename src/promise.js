@@ -152,6 +152,22 @@
         };
     };
 
+    Promise.all = function(promises) {
+        return new Promise(function(resolve, reject) {
+            let counter = 0;
+            const results = [];
+            for (let i = 0; i < promises.length; i++) {
+                const promise = promises[i];
+                promise.then(function(value) {
+                    counter++;
+                    if (counter === promises.length) {
+                        resolve(results);
+                    }
+                }).catch(reject);
+            }
+        });
+    };
+
     // **** **** **** **** **** **** **** **** **** **** **** **** ****
     // UTILITES
     // **** **** **** **** **** **** **** **** **** **** **** **** ****
