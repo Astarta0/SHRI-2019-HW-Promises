@@ -5,16 +5,43 @@
     <title>Promise polyfill</title>
 </head>
 <body>
+    <div>Open console, please</div>
     <script>
         // Для проверки полифила удаляем встроенные объект промисов
         delete window.Promise;
     </script>
     <script src="./src/promise.js"></script>
     <script>
-        const promise = new Promise(function(resolve) {
+        const p = new Promise(function(resolve) {
             setTimeout(resolve, 1000, 'ok');
         });
-        promise.then(status => console.log(`All is ${status}`))
+        p.then(status => console.log(`All is ${status}`))
+    </script>
+    <script>
+        console.log('Пример использования из задания:');
+        var promise = new Promise(function (resolve){
+            resolve(42)
+        })
+
+        promise
+            .then(function (value) {
+                return value + 1
+            })
+            .then(function (value) {
+                console.log(value) // 42
+                return new Promise(function (resolve) { resolve(137) })
+            })
+            .then(function (value) {
+                console.log(value) // 137
+                throw new Error()
+            })
+            .then(
+                function () { console.log('Будет проигнорировано') },
+                function () { return 'ошибка обработана' }
+            )
+            .then(function (value) {
+                console.log(value) // "ошибка обработана"
+            })
     </script>
 </body>
 </html>
