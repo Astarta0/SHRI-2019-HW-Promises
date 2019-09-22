@@ -1,30 +1,26 @@
 const promisesAplusTests = require("promises-aplus-tests");
-const Promise = require("../index");
+const Promise = require("../src/promise");
+
+function resolved (value) {
+    return new Promise(function(resolve) {
+        resolve(value);
+    });
+}
+
+function rejected (reason) {
+    return new Promise(function(resolve, reject) {
+        reject(reason);
+    });
+}
 
 const adapter = {
-    deferred() {
-        const promise = new Promise(()=>{});
-        return {
-            promise,
-            resolve: value => promise.resolve(value),
-            reject: reason => promise.reject(reason)
-        }
-    },
-    resolved(value) {
-        const promise = new Promise(()=>{});
-        promise.value = value;
-        promise.state = 'fulfilled';
-        return promise;
-    },
-    rejected(reason) {
-        const promise = new Promise(()=>{});
-        promise.value = reason;
-        promise.state = 'rejected';
-        return promise;
-    }
+    resolved: resolved,
+    rejected: rejected,
+    deferred: Promise.deferred
 };
 
-test.skip('test for compliance', done => {
+test('test for compliance', done => {
+    console.log('---------------------------------------------------');
     promisesAplusTests(adapter, function (err) {
         done(err);
     });

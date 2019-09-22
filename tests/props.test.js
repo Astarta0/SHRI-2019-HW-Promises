@@ -1,5 +1,5 @@
-const Promise = require('../index');
-const utils = require('../utils');
+const Promise = require('../src/promise');
+const utils = require('./utils');
 
 test('ошибка в executore', done => {
     const message = 'ошибка в executore';

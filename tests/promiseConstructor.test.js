@@ -1,4 +1,6 @@
-require('../index');
+const Promise = require('../src/promise');
+
+Promise.strict = true;
 
 test('Передача null в конструктор промиса', () => {
     expect(() => {

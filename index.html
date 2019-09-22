@@ -5,6 +5,16 @@
     <title>Promise polyfill</title>
 </head>
 <body>
-    <script src="./index.js"></script>
+    <script>
+        // Для проверки полифила удаляем встроенные объект промисов
+        delete window.Promise;
+    </script>
+    <script src="./src/promise.js"></script>
+    <script>
+        const promise = new Promise(function(resolve) {
+            setTimeout(resolve, 1000, 'ok');
+        });
+        promise.then(status => console.log(`All is ${status}`))
+    </script>
 </body>
 </html>
