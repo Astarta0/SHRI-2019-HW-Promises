@@ -49,3 +49,19 @@ test('chain', done => {
     });
     promise.reject();
 });
+
+test('chain 2', (done) => {
+    expect.assertions(2);
+    const p = new Promise((resolve) => {
+        setTimeout(() => resolve('First resolved value'), 100);
+    });
+    p.then(function (value) {
+        expect(value).toEqual('First resolved value');
+        return new Promise((resolve) => {
+            resolve('Second resolved value');
+        });
+    }).then(function (value) {
+        expect(value).toEqual('Second resolved value');
+        done();
+    });
+});

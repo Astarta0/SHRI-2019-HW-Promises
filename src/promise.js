@@ -214,7 +214,6 @@
         if (thenable && ((type === 'function') || (type === 'object'))) {
             const thenFunction = thenable.then;
             if (thenFunction && (typeof thenFunction === 'function')) {
-                // thenFunction.call(value, resolve, reject);
                 return thenFunction.bind(thenable);
             }
         }
