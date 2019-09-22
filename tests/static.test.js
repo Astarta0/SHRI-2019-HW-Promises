@@ -29,3 +29,38 @@ test('Promise.all fail', (done) => {
             done();
         });
 });
+
+test('Promise.race ok', (done) => {
+    expect.assertions(1);
+
+    const p1 = new Promise(function(resolve) {
+        setTimeout(resolve, 500, "один");
+    });
+    const p2 = new Promise(function(resolve) {
+        setTimeout(resolve, 100, "два");
+    });
+
+    Promise.race([p1, p2]).then(function(value) {
+        expect(value).toEqual("два");
+        done();
+    });
+});
+
+test('Promise.race fail', (done) => {
+    expect.assertions(1);
+
+    const p1 = new Promise(function(resolve) {
+        setTimeout(resolve, 500, "один");
+    });
+    const p2 = new Promise(function(_, reject) {
+        setTimeout(reject, 100, "два");
+    });
+
+    Promise.race([p1, p2]).then(function(value) {
+        expect(true).toBeFalsy();
+        done();
+    }).catch(err => {
+        expect(err).toEqual("два");
+        done();
+    });
+});

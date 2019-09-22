@@ -135,6 +135,50 @@
         return this.then(null, onRejected);
     };
 
+    /**
+     * Promise.all возвращает массив значений от всех обещаний, которые были ему переданы.
+     * Возвращаемый массив значений сохраняет порядок оригинального перечисляемого объекта,
+     * но не порядок выполнения обещаний.
+     * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+     * @param promises
+     * @returns {Promise}
+     */
+    Promise.all = function(promises) {
+        return new Promise(function(resolve, reject) {
+            let counter = 0;
+            const results = [];
+            for (let i = 0; i < promises.length; i++) {
+                const promise = promises[i];
+                promise.then(function(value) {
+                    counter++;
+                    if (counter === promises.length) {
+                        resolve(results);
+                    }
+                }).catch(reject);
+            }
+        });
+    };
+
+    /**
+     * Метод race  возвращает Обещание (Promise) с результатом, первого завершенного
+     * из переданных обещаний. Т.е. возвратит resolve или reject, в зависимости
+     * от того, что случится первым.
+     * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/race
+     * @param promises
+     * @returns {Promise}
+     */
+    Promise.race = function(promises) {
+        return new Promise(function(resolve, reject) {
+            for (let i = 0; i < promises.length; i++) {
+                const promise = promises[i];
+                promise.then(resolve).catch(reject);
+            }
+        });
+    };
+
+    /**
+     * Для запуска compliance тестов из promise/a+
+     */
     Promise.deferred = function() {
         let resolver, rejecter;
         const promise = new Promise(function(resolve, reject) {
@@ -150,22 +194,6 @@
                 return rejecter(reason);
             }
         };
-    };
-
-    Promise.all = function(promises) {
-        return new Promise(function(resolve, reject) {
-            let counter = 0;
-            const results = [];
-            for (let i = 0; i < promises.length; i++) {
-                const promise = promises[i];
-                promise.then(function(value) {
-                    counter++;
-                    if (counter === promises.length) {
-                        resolve(results);
-                    }
-                }).catch(reject);
-            }
-        });
     };
 
     // **** **** **** **** **** **** **** **** **** **** **** **** ****
