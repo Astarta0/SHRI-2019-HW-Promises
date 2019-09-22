@@ -154,6 +154,15 @@
         });
     };
 
+    /**
+     * http://bluebirdjs.com/docs/api/done.html
+     */
+    Promise.prototype.done = function(onFulfilled, onRejected) {
+        return this.then(onFulfilled, onRejected).then(null, function(err) {
+            setTimeout(function() { throw err }, 0);
+        });
+    };
+
     Promise.resolve = function(value) {
         return new Promise(function(resolve) {
             resolve(value);
