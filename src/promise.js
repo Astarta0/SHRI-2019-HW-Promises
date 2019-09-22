@@ -135,6 +135,25 @@
         return this.then(null, onRejected);
     };
 
+    /**
+     * Метод finally() возвращает Promise. Когда Promise (обещание) был выполнен, в не зависимости
+     * успешно или с ошибкой, указанная функция будет выполнена.
+     * https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Promise/finally
+     * @param onFinally
+     */
+    Promise.prototype.finally = function(onFinally) {
+        if (typeof onFinally !== 'function') {
+            return this;
+        }
+        return this.then(function(value) {
+            onFinally();
+            return value;
+        }, function(reason) {
+            onFinally();
+            throw reason;
+        });
+    };
+
     Promise.resolve = function(value) {
         return new Promise(function(resolve) {
             resolve(value);

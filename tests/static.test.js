@@ -1,3 +1,5 @@
+const Promise = require('../src/promise');
+
 test('Promise.all ok', (done) => {
     expect.assertions(1);
 
