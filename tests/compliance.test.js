@@ -1,21 +1,9 @@
 const promisesAplusTests = require("promises-aplus-tests");
 const Promise = require("../src/promise");
 
-function resolved (value) {
-    return new Promise(function(resolve) {
-        resolve(value);
-    });
-}
-
-function rejected (reason) {
-    return new Promise(function(resolve, reject) {
-        reject(reason);
-    });
-}
-
 const adapter = {
-    resolved: resolved,
-    rejected: rejected,
+    resolved: Promise.resolve,
+    rejected: Promise.reject,
     deferred: Promise.deferred
 };
 

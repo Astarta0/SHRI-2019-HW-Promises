@@ -56,11 +56,27 @@ test('Promise.race fail', (done) => {
         setTimeout(reject, 100, "два");
     });
 
-    Promise.race([p1, p2]).then(function(value) {
+    Promise.race([p1, p2]).then(function() {
         expect(true).toBeFalsy();
         done();
     }).catch(err => {
         expect(err).toEqual("два");
+        done();
+    });
+});
+
+test('Promise.resolve', done => {
+    expect.assertions(1);
+    Promise.resolve('resolve').then(value => {
+        expect(value).toEqual("resolve");
+        done();
+    });
+});
+
+test('Promise.reject', done => {
+    expect.assertions(1);
+    Promise.reject('reject').catch(value => {
+        expect(value).toEqual("reject");
         done();
     });
 });

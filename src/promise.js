@@ -135,6 +135,18 @@
         return this.then(null, onRejected);
     };
 
+    Promise.resolve = function(value) {
+        return new Promise(function(resolve) {
+            resolve(value);
+        });
+    };
+
+    Promise.reject = function(reason) {
+        return new Promise(function(_, reject) {
+            reject(reason);
+        });
+    };
+
     /**
      * Promise.all возвращает массив значений от всех обещаний, которые были ему переданы.
      * Возвращаемый массив значений сохраняет порядок оригинального перечисляемого объекта,
