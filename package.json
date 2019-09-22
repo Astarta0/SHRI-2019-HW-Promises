@@ -1,0 +1,29 @@
+{
+  "name": "shri-2019-hw-promises",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Astarta0/SHRI-2019-HW-Promises.git"
+  },
+  "author": "Astarta0",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Astarta0/SHRI-2019-HW-Promises/issues"
+  },
+  "homepage": "https://github.com/Astarta0/SHRI-2019-HW-Promises#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-throw-expressions": "^7.2.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "promises-aplus-tests": "^2.1.2"
+  }
+}
