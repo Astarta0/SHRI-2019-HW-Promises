@@ -182,6 +182,7 @@
                 const promise = promises[i];
                 promise.then(function(value) {
                     counter++;
+                    results[i] = value;
                     if (counter === promises.length) {
                         resolve(results);
                     }
